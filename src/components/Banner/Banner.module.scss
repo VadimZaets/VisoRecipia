@@ -1,0 +1,89 @@
+.bannerContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 600px;
+  padding: 20px var(--main-horizontal-padding) 20px var(--main-horizontal-padding);
+  background: linear-gradient(0deg, rgba(86,176,124,1) 0%, rgba(86,176,124,1) 10%, rgba(109,239,147,1) 100%);
+}
+
+.contentTitle{
+  font-size: 58px;
+  font-weight: bold;
+  color: var(--secondary-text-color);
+}
+.contentText{
+  font-size: 20px;
+}
+.inputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+}
+.input{
+  padding: 16px 10px;
+  font-size: 16px;
+  flex-grow: 1;
+  margin-right: 16px;
+  border-radius: 4px;
+  border: none;
+}
+.searchButton{
+  padding: 16px 48px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #509570;
+  border: none;
+  color:#fff;
+  border-radius: 4px;
+}
+.searchIcon {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+}
+
+.img {
+  width: 440px;
+  height: 440px;
+  position: absolute;
+  right: 40px;
+  bottom: -24px;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.suggestionsList {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 74%;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+
+.suggestionItem {
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.suggestionItem:hover {
+  background-color: #f0f0f0;
+}
+
+.suggestionImage {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+

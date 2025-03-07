@@ -1,0 +1,21 @@
+.container{
+  padding: 80px var(--main-horizontal-padding) 80px var(--main-horizontal-padding);
+}
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.listImage{
+  width: 320px;
+  height: 240px;
+  border-radius: 16px;
+}
+
+.name{
+  font-size: 18px;
+  margin-top: 16px;
+}
+
+
