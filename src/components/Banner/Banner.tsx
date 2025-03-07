@@ -2,8 +2,10 @@ import React, {useEffect, useRef, useState} from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import styles from "./Banner.module.scss";
 import { useMealsByQuery } from "../../api/useMealsApi";
+import {useNavigate} from "react-router-dom";
 
 export const Banner = () => {
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false);
     const { data: searchResults, isLoading: isSearchLoading } = useMealsByQuery(searchQuery);
@@ -58,7 +60,7 @@ export const Banner = () => {
                         <div className={styles.suggestionsList} ref={suggestionsRef}>
                             <ul>
                                 {searchResults.map((meal: any) => (
-                                    <li key={meal.idMeal} className={styles.suggestionItem}>
+                                    <li key={meal.idMeal} className={styles.suggestionItem} onClick={() => navigate(`/meal/${meal.idMeal}`)}>
                                         <img src={meal.strMealThumb} alt={meal.strMeal} className={styles.suggestionImage}/>
                                         <span>{meal.strMeal}</span>
                                     </li>
