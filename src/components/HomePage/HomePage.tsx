@@ -6,10 +6,8 @@ import { CategoryFilter } from "../CategoryFilter/CategoryFilter";
 import styles from "./HomePage.module.scss";
 
 export const HomePage = () => {
-    const [categories, setCategories] = useState<string[]>(["All"]);
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
     const [filteredMeals, setFilteredMeals] = useState<Meal[]>([]);
-    const [searchQuery, setSearchQuery] = useState("");
     const itemsPerPage = 8;
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -20,11 +18,6 @@ export const HomePage = () => {
             setFilteredMeals(data);
         }
     }, [data]);
-
-    const handleSearch = (query: string) => {
-        setSearchQuery(query);
-    };
-
     const indexOfLastMeal = currentPage * itemsPerPage;
     const indexOfFirstMeal = indexOfLastMeal - itemsPerPage;
     const currentMeals = filteredMeals.slice(indexOfFirstMeal, indexOfLastMeal);

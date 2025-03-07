@@ -1,21 +1,43 @@
-import React, { useEffect, useState } from "react";
-import { FaSearch } from "react-icons/fa";
+import React, {useEffect, useRef, useState} from "react";
 import { useDebounce } from "../../hooks/useDebounce";
 import styles from "./Banner.module.scss";
 import { useMealsByQuery } from "../../api/useMealsApi";
 
 export const Banner = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [showSuggestions, setShowSuggestions] = useState(false);
     const { data: searchResults, isLoading: isSearchLoading } = useMealsByQuery(searchQuery);
+
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const suggestionsRef = useRef<HTMLDivElement | null>(null);
 
     const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
     useEffect(() => {
         if (debouncedSearchQuery) {
             setSearchQuery(debouncedSearchQuery);
+            setShowSuggestions(true);
         }
     }, [debouncedSearchQuery]);
 
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (
+                inputRef.current &&
+                !inputRef.current.contains(event.target as Node) &&
+                suggestionsRef.current &&
+                !suggestionsRef.current.contains(event.target as Node)
+            ) {
+                setShowSuggestions(false);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
     return (
         <div className={styles.bannerContainer}>
             <div>
@@ -29,14 +51,11 @@ export const Banner = () => {
                         placeholder="Search for recipes..."
                         className={styles.input}
                         value={searchQuery}
+                        ref={inputRef}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <button className={styles.searchButton}>
-                        <FaSearch className={styles.searchIcon}/>
-                        Find Food
-                    </button>
-                    {debouncedSearchQuery && searchResults && searchResults.length > 0 && (
-                        <div className={styles.suggestionsList}>
+                    {showSuggestions && searchResults && searchResults.length > 0 && (
+                        <div className={styles.suggestionsList} ref={suggestionsRef}>
                             <ul>
                                 {searchResults.map((meal: any) => (
                                     <li key={meal.idMeal} className={styles.suggestionItem}>

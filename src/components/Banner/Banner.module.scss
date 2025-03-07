@@ -17,6 +17,7 @@
   font-size: 20px;
 }
 .inputContainer {
+  width: 50%;
   position: relative;
   display: flex;
   align-items: center;
@@ -30,21 +31,6 @@
   border-radius: 4px;
   border: none;
 }
-.searchButton{
-  padding: 16px 48px;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: #509570;
-  border: none;
-  color:#fff;
-  border-radius: 4px;
-}
-.searchIcon {
-  width: 14px;
-  height: 14px;
-  margin-right: 4px;
-}
-
 .img {
   width: 440px;
   height: 440px;
@@ -60,7 +46,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  width: 74%;
+  width: 96%;
   max-height: 300px;
   overflow-y: auto;
   background-color: white;
