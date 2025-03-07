@@ -1,13 +1,18 @@
-.container{
-  padding: 60px var(--main-horizontal-padding) 60px var(--main-horizontal-padding);
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 60px var(--main-horizontal-padding);
 }
 .list{
   margin-top: 30px;
+  width: 60%;
 }
 .listItem{
   display: flex;
   margin-bottom: 20px;
-  width: 45%;
+  width: 600px;
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -33,3 +38,13 @@
   border: none;
   background: none;
 }
+
+.combinedIngContainer{
+  width: 30%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  h2{
+    margin-bottom: 20px;
+  }
+}
+

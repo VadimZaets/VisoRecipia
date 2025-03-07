@@ -35,6 +35,6 @@ export const useMealsByQuery = (query: string) => {
     return useQuery({
         queryKey: ['meals', query],
         queryFn: () => fetchMealsByQuery(query),
-        enabled: !!query, // Only fetch when there is a query
+        enabled: !!query,
     });
 };

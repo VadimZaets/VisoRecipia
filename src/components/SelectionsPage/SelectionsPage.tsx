@@ -2,9 +2,11 @@ import React from "react";
 import { useSelections } from "../../api/useSelections";
 import styles from "./SelectionsPage.module.scss";
 import { FaRegTrashAlt } from "react-icons/fa";
+import {combineIngredients} from "../../utils/combineIngredients";
 
 export const SelectionsPage = () => {
     const { selections, removeFromSelections } = useSelections();
+    const combinedIngredients = combineIngredients(selections);
 
     const handleRemove = (mealId: string) => {
         removeFromSelections(mealId);
@@ -13,6 +15,7 @@ export const SelectionsPage = () => {
 
     return (
         <div className={styles.container}>
+            <div className={styles.leftSide}>
             <h1>Selected Meals</h1>
             {selections.length === 0 ? (
                 <p>No meals selected.</p>
@@ -31,10 +34,20 @@ export const SelectionsPage = () => {
                                 <h3>Ingredients: </h3>
                                 <p>{meal?.ingredients.join(", ")}</p>
                             </div>
-
                         </li>
                     ))}
                 </ul>
+            )}
+            </div>
+            {combinedIngredients.length > 0 && (
+                <div className={styles.combinedIngContainer}>
+                    <h2>Combined Ingredients:</h2>
+                    <ul>
+                        {combinedIngredients.map((ingredient, index) => (
+                            <li key={index}>{ingredient}</li>
+                        ))}
+                    </ul>
+                </div>
             )}
         </div>
     );

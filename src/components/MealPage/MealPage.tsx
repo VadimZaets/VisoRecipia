@@ -6,10 +6,9 @@ import styles from "./MealPage.module.scss";
 
 export const MealPage = () => {
     const { id } = useParams();
-    const { data, isLoading } = useAllMeals();
+    const { data } = useAllMeals();
     const { addToSelections } = useSelections();
 
-    if (isLoading) return <div>Loading...</div>;
 
     const meal = data?.find((meal) => meal.idMeal === id);
 
