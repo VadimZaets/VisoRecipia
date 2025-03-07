@@ -5,8 +5,10 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  & > li {
+    cursor: pointer;
+  }
 }
-
 .listImage{
   width: 320px;
   height: 240px;

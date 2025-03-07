@@ -5,11 +5,16 @@ export type Meal = {
     strMeal: string;
     strMealThumb: string;
     strCategory: string;
+    strInstructions: string;
+    [key: `strIngredient${number}`]: string;
+    [key: `strMeasure${number}`]: string;
 };
+
 
 const fetchAllMeals = async (): Promise<Meal[]> => {
     const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     const data = await response.json();
+    console.log(data.meals);
     return data.meals || [];
 };
 

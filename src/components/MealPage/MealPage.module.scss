@@ -1,0 +1,41 @@
+.container{
+  padding: 60px var(--main-horizontal-padding) 60px var(--main-horizontal-padding);
+}
+
+.wrapper{
+  display: flex;
+}
+.image{
+  width: 400px;
+  height: 400px;
+  border-radius: 16px;
+}
+
+.descriptionContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 50px;
+  padding: 20px 0;
+
+}
+.instructionContainer{
+  margin-top: 20px;
+}
+.list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  width: 44%;
+}
+.button{
+  width: 200px;
+  height: 60px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--active-text-color);
+  color: var(--secondary-text-color);
+  font-size: 18px;
+  font-weight: bold;
+}
+

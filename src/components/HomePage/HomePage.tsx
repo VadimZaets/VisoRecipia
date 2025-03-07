@@ -4,20 +4,29 @@ import { Meal, useAllMeals } from "../../api/useMealsApi";
 import { Pagination } from "../Pagintion/Pagintaion";
 import { CategoryFilter } from "../CategoryFilter/CategoryFilter";
 import styles from "./HomePage.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const HomePage = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("All");
     const [filteredMeals, setFilteredMeals] = useState<Meal[]>([]);
     const itemsPerPage = 8;
     const [currentPage, setCurrentPage] = useState(1);
+    const navigate = useNavigate();
 
     const { data, isLoading } = useAllMeals();
 
     useEffect(() => {
-        if (data) {
+        if (!data) return;
+
+        if (selectedCategory === "All") {
             setFilteredMeals(data);
+        } else {
+            setFilteredMeals(data.filter((meal) => meal.strCategory === selectedCategory));
         }
-    }, [data]);
+
+        setCurrentPage(1);
+    }, [selectedCategory, data]);
+
     const indexOfLastMeal = currentPage * itemsPerPage;
     const indexOfFirstMeal = indexOfLastMeal - itemsPerPage;
     const currentMeals = filteredMeals.slice(indexOfFirstMeal, indexOfLastMeal);
@@ -25,21 +34,19 @@ export const HomePage = () => {
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    if (isLoading) return <div>Loading...</div>;
-
     return (
         <div>
-            <Banner  />
+            <Banner />
             <div className={styles.container}>
                 <CategoryFilter
-                    categories={["All", ...Array.from(new Set(filteredMeals.map((meal) => meal.strCategory)))]}
+                    categories={["All", ...Array.from(new Set(data?.map((meal) => meal.strCategory)))]}
                     selectedCategory={selectedCategory}
                     onCategoryChange={setSelectedCategory}
                 />
 
                 <ul className={styles.list}>
                     {currentMeals.map((meal: Meal) => (
-                        <li key={meal.idMeal} className={styles.listItem}>
+                        <li key={meal.idMeal} className={styles.listItem} onClick={() => navigate(`/meal/${meal.idMeal}`)} >
                             <div>
                                 <img
                                     src={meal.strMealThumb}
